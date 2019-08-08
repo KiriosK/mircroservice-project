@@ -1,0 +1,59 @@
+version: "2"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+  waitforrabbit:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - rabbitmq
+    command: rabbitmq:5672
+
+  server:
+    build: ./server
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@db:5432/bookshelf
+      REDIS_URL: redis://redis:6379/
+      RABBIT_URL: amqp://rabbitmq:5672/
+      PORT: 80
+    depends_on:
+      - db_writer
+      - top_calculator
+      - redis
+      - waitforrabbit
+
+  db_writer:
+    build: ./db_writer
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@db:5432/bookshelf
+      RABBIT_URL: amqp://rabbitmq:5672/
+    depends_on:
+      - db
+      - waitforrabbit
+
+  top_calculator:
+    build: ./top_calculator
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@db:5432/bookshelf
+      REDIS_URL: redis://redis:6379/
+    depends_on:
+      - redis
+      - db
+
+  db:
+    image: "postgres:alpine"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: bookshelf
+
+  redis:
+    image: "redis:alpine"
+
+  rabbitmq:
+    image: "rabbitmq:alpine"

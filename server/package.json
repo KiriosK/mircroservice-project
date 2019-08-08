@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KiriosK <KiriosK@yandex.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "ioredis": "^4.14.0",
+    "micromq": "^3.0.2"
+  }
+}

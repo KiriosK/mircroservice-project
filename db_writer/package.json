@@ -1,0 +1,16 @@
+{
+  "name": "db_writer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KiriosK <KiriosK@yandex.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.19.1",
+    "micromq": "^3.0.2",
+    "pg": "^7.12.0"
+  }
+}

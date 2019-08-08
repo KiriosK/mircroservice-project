@@ -1,0 +1,16 @@
+{
+  "name": "top_calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KiriosK <KiriosK@yandex.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "ioredis": "^4.14.0",
+    "knex": "^0.19.1",
+    "pg": "^7.12.0"
+  }
+}
