@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { Api } from "../api/index";
 export default {
   name: "TopList",
   data() {
@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     getTop() {
-      axios.get("http://localhost:80/api/top5").then(({ data }) => {
-        this.authors = data || [];
+      Api.getTop5().then(({ data }) => {
+        this.authors = data;
       });
     }
   }

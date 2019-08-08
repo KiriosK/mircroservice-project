@@ -40,6 +40,6 @@ async function main() {
   console.log("migrations done");
 }
 
-main().catch(e => console.error(e));
-
-app.start();
+main()
+  .then(() => app.start())
+  .catch(e => console.error(e));

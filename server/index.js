@@ -16,16 +16,15 @@ const app = new Gateway({
 
 app.get("/top5", (req, res) => {
   clientRedis.get("top5", (err, reply) => {
-    let resBody = [];
+    let resBody;
     if (!err) {
       resBody = JSON.parse(reply);
     }
-    res.status(200).json(resBody);
+    res.status(200).json(resBody || []);
   });
 });
 
 app.post(["/author", "/book"], async (req, res) => {
-  console.log("SERVER:");
   await res.delegate("db_writer");
 });
 

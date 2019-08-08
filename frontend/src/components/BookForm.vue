@@ -1,5 +1,5 @@
 <template>
-  <form class="form-container" @submit.prevent="sendBookData">
+  <form class="form-container" @submit.prevent="onSubmit">
     <div class="row">
       <label>Author ID</label>
       <input type="number" v-model="author_id" placeholder="Author ID.." required />
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { Api } from "../api/index";
 
 export default {
   data() {
@@ -30,16 +30,8 @@ export default {
     };
   },
   methods: {
-    sendBookData(у) {
-      axios({
-        method: "post",
-        url: "http://localhost:80/api/book",
-        data: {
-          author_id: this.author_id,
-          title: this.title,
-          pages: this.pages
-        }
-      }).catch(err => console.log(err));
+    onSubmit() {
+      Api.sendBookData(this.author_id, this.title, this.pages);
       this.author_id = null;
       this.title = null;
       this.pages = null;

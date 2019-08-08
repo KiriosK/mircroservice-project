@@ -1,5 +1,6 @@
 const Redis = require("ioredis");
-const knex = require("./knex");
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig);
 const clientRedis = new Redis(process.env.REDIS_URL);
 
 setInterval(() => {
@@ -11,6 +12,6 @@ setInterval(() => {
     .groupBy("authors.id")
     .orderBy(knex.raw("COUNT(*)"), "desc")
     .limit(5)
-    .then(() => clientRedis.set("top5", JSON.stringify(data)))
+    .then(data => clientRedis.set("top5", JSON.stringify(data)))
     .catch(e => console.log(e));
 }, 60000);

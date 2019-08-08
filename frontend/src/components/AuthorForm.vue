@@ -1,5 +1,5 @@
 <template>
-  <form class="form-container" @submit.prevent="submitAuthorData">
+  <form class="form-container" @submit.prevent="onSubmit">
     <div class="row">
       <label>Name</label>
       <input type="text" v-model="name" placeholder="Author name.." required />
@@ -16,6 +16,7 @@
 
 <script>
 import axios from "axios";
+import { Api } from "../api/index";
 
 export default {
   data() {
@@ -25,15 +26,8 @@ export default {
     };
   },
   methods: {
-    submitAuthorData() {
-      axios({
-        method: "post",
-        url: "http://localhost:80/api/author",
-        data: {
-          name: this.name,
-          age: this.age
-        }
-      }).catch(err => console.log(err));
+    onSubmit() {
+      Api.sendAuthorData(this.name, this.age);
       this.name = null;
       this.age = null;
     }
