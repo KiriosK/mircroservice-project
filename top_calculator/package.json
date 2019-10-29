@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ioredis": "^4.14.0",
-    "knex": "^0.19.1",
+    "knex": "^0.19.5",
     "pg": "^7.12.0"
   }
 }
