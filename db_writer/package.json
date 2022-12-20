@@ -9,7 +9,7 @@
   "author": "KiriosK <KiriosK@yandex.ru>",
   "license": "ISC",
   "dependencies": {
-    "knex": "^0.19.1",
+    "knex": "^2.3.0",
     "micromq": "^3.0.2",
     "pg": "^7.12.0"
   }
